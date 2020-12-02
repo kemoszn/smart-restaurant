@@ -25,9 +25,14 @@
         <a href="#">
             <img src="{% if item.image %}{{ item.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
         </a>
-        <a href="#">{{ item.name }}</a>
+        <a href="#">{{ item.name }} id is {{ item.pk }}</a>
         <br>
         ${{ item.price }}
+        <form action="{% url "cart:cart_add" item.id %}" method="post">
+            {{ cart_product_form }}
+            {% csrf_token %}
+        <input type="submit" value="Add to cart">
+        </form>
     </div>
     {% endfor %}
 </div>
