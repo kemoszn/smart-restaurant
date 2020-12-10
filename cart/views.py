@@ -8,7 +8,7 @@ from .forms import CartAddItemForm
 def cart_add(request, item_id):
     cart = Cart(request)
     item = get_object_or_404(Item, id=item_id)
-    print(item)
+    print(item.category)
     form = CartAddItemForm(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
@@ -16,8 +16,7 @@ def cart_add(request, item_id):
         quantity=cd['quantity'],
         update_quantity=cd['update'])
     print("success")
-    return redirect('cart:cart_detail')
-
+    return redirect(request.META['HTTP_REFERER'])
 
 def cart_remove(request, item_id):
     cart = Cart(request)

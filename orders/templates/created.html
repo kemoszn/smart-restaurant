@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}
+Thank you
+{% endblock %}
+{% block content %}
+<br>
+<div class="card" style="float: center;">
+  <div class="card-body" style="float: center;">
+    <p class="card-text">
+        <h1 style="color: #eb842d;">Thank you</h1>
+        <p>Your order has been successfully completed. Your order number is
+    <strong>{{ order.id }}</strong>.</p>
+    </p>
+    
+  </div>
+</div> <br>
+
+
+{% endblock %}

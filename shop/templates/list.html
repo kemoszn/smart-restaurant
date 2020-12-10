@@ -1,39 +1,105 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block title %}
 {% if category %}{{ category.name }}{% else %}Products{% endif %}
 {% endblock %}
 {% block content %}
-<div id="sidebar">
-    <h3>Categories</h3>
-    <ul>
-        <li {% if not category %}class="selected" {% endif %}>
-            <a href="{% url "shop:item_list" %}">All</a>
-        </li>
-        {% for c in categories %}
-        <li {% if category.slug == c.slug %}class="selected" {% endif %}>
-            <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
-        </li>
-        {% endfor %}
-    </ul>
-</div>
-<div id="main" class="product-list">
-    <h1>{% if category %}{{ category.name }}{% else %}Items
-        {% endif %}</h1>
-    {% for item in items %}
-    <div class="item">
-        <a href="#">
-            <img src="{% if item.image %}{{ item.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
-        </a>
-        <a href="#">{{ item.name }} id is {{ item.pk }}</a>
-        <br>
-        ${{ item.price }}
-        <form action="{% url "cart:cart_add" item.id %}" method="post">
-            {{ cart_product_form }}
-            {% csrf_token %}
-        <input type="submit" value="Add to cart">
-        </form>
-    </div>
+
+<div class="dropdown">
+  <button class="btn dropdown-toggle" type="button" 
+  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white; background-color: #282322;">
+    {% if not category %}
+    All
+    {% else %}
+    {{ category }}
+    {% endif %}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    {% if not category %}
+    {% else %}
+      <a class="dropdown-item" href="{% url "shop:item_list" %}">All</a>
+    {% endif %}
+    {% for c in categories %}
+    {% if c != category %}
+      <a class ="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+    {% endif %}
     {% endfor %}
+  </div>
+  <a href="{% url 'cart:cart_detail' %}"><button class="btn" type="button" style="float: right; color: white; background-color: #eb842d;">
+  Proceed <i class="fas fa-angle-right"></i></button></a>
 </div>
+
+
+
+<br>
+
+<div class="row" style="text-align: -webkit-center;">
+{% for item in page_obj %}
+  <div class="col-sm-6 col-md-4" style="padding: 12px;">
+    <div class="card" style="width: 20rem;">
+      <img class="card-img-top" style="width: 19.9rem; height: 220px;" src="{% if item.image %}{{ item.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+      <div class="card-body">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <h6><b>{{ item.price }} SDG </b></h6> <hr>
+        <p class="card-text"><b>Ingredients:</b> {{ item.ingredients }}</p>
+        <p>
+          {% if item.name in cart_items %}
+
+          <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+           <i class="fas fa-check-circle" style="color: green; font-size: 18px;"></i> This item is selected
+          {% else %}
+          <form action="{% url "cart:cart_add" item.id %}" method="post">
+            {{ cart_product_form|crispy }}
+            {% csrf_token %}
+            <button type="submit" class="btn" style="color: white; background-color: #eb842d;"><i class="fas fa-plus"></i> Add to order</button>
+          </form>
+          {% endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+  <br>
+{% endfor %}
+</div>
+
+<br><br>
+  <div class="container">
+  <div class="row justify-content-center">
+  <nav aria-label="Page navigation example" style="justify-content: center;">
+  {% if page_obj %}
+  <ul class="pagination justify-content-end">
+  {% if page_obj.has_previous %}
+  <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1" style="color: white; color: #eb842d;">Previous</a>
+    </li>
+  {% else %}
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+  {% endif %}
+  {% for i in paginator.page_range %}
+  {% if page_obj.number == i %}
+    <li class="page-item active" style="z-index: 0; background-color: #eb842d; border-color: #eb842d;">
+      <a class="page-link" href="#" style="color: white; background-color: #eb842d; border-color: #eb842d;">{{ i }} <span class="sr-only">(current)</span></a>
+    </li>
+  {% else %}
+    <li class="page-item"><a class="page-link" href="?page={{ i }}" style="color: white; color: #eb842d;">{{ i }}</a></li>
+  {% endif %}
+  {% endfor %}
+  {% if page_obj.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.next_page_number }}" style="color: white; color: #eb842d;">Next</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a class="page-link" href="#">Next</a>
+    </li>
+    {% endif %}
+  </ul>
+{% endif %}
+</nav>
+</div>
+</div>
+<br>
 {% endblock %}

@@ -226,7 +226,7 @@ ul.errorlist {
 }
 
 .order-info {
-    float:right;
+    float:center;
     width:300px;
     background:#efefef;
     padding:10px 20px;
@@ -246,7 +246,7 @@ ul.errorlist {
 
 .order-info p {
     font-weight:bold;
-    float:right;
+    float:center;
 }
 
 .order-info span {

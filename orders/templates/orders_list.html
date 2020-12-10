@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}
+Orders Management
+{% endblock %}
+{% block content %}
+<div class="row">
+<div class="col col-md-5">
+<h2 style="text-decoration: underline; text-align: center;"><span class="badge badge-warning">Orders</span></h2>
+<div id="accordion">
+{% for order in orders %}
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <b>Order No. {{ order.id }} at Table {{order.table}}</b>
+        </button>
+        <a href="{% url 'orders:process_order' order_id=order.id %}"><i class="fas fa-print" style="float: right; text-align: right; font-size: 27px;"></i></a>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+      {% for item in order_items %}
+{% if item.order == order %}
+        
+        
+        {{ item.quantity }} {{ item.item }}<br>
+        
+          {% endif %}
+{% endfor %}
+  <hr> <b>Total</b> <b style="float:right;">{{ order.total }}</b> 
+      </div>
+    </div>
+  </div>
+<br>
+{% endfor %}
+</div>
+</div>
+<div class="col col-md-2">
+</div>
+<div class="col col-md-5">
+<h2 style="text-decoration: underline; float: center; text-align: center;"><span class="badge badge-warning">Tables</span></h2>
+<div id="accordion">
+{% for table in tables %}
+  <div class="card">
+    <div class="card-header" id="{{ table }}">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ table }}" aria-expanded="true" aria-controls="{{ table }}">
+          <i class="fas fa-circle" style="color: green; font-size: 13px;"></i> <b>TABLE {{ table.number }}</b>
+        </button>
+        <a href="{% url 'orders:process_table' table_number=table.number %}"><i class="fas fa-clipboard-check" style="float: right; text-align: right; font-size: 27px;"></i></a>
+      </h5>
+    </div>
+
+    <div id="collapse{{ table }}" class="collapse hide" aria-labelledby="{{ table }}" data-parent="#accordion">
+      <div class="card-body">
+        {% for order in proc_orders %}
+        {% if order.table == table.number %}
+        <b style="font-size: 25px;"><span class="badge badge-pill badge-warning">{{ order }}</span> </b> <br>
+        {% for i in order_items %}
+        {% if i.order == order %}
+        {{ i.quantity }} {{ i.item }}<br>
+        {% endif %}
+        {% endfor %}
+        <hr> <b>Total</b> <b style="float:right;">{{ order.total }} SDG</b> <br><br>
+        {% endif %}
+        
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div> <br>
+{% endfor %}
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}
+Checkout
+{% endblock %}
+{% block content %}
+<h4 style="text-decoration: underline; text-align: center;">Your Order</h4>
+
+<div class="card" style="float: center;">
+  <div class="card-body" style="float: center;">
+    <p class="card-text">
+        {% for item in cart %}
+            <div class="row">
+            <div class="col col-md-6 col-sm-4">
+            <p style="overflow-wrap: break-word;">{{ item.quantity }} {{ item.item.name }}</p>
+            </div>
+            <div class="col col-md-6 col-sm-8">
+            <span style="float: right;">{{ item.total_price }}</span>
+            </div>
+            <br>
+            </div>
+        {% endfor %}
+    <hr>
+    <p><b>Total: <span style="float: right;">{{ cart.get_total_price }} SDG</span></b></p>
+    </p>
+    
+  </div>
+</div> <br>
+<form action="." method="post" class="order-form"  style="float: center; text-align: center;">
+    <button type="submit" class="btn" style="color: white; background-color: #eb842d;">Place Order</button>
+    {% csrf_token %}
+</form>
+{% endblock %}
