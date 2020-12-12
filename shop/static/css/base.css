@@ -14,3 +14,9 @@ h4 {
     direction: ltr;
     font-family: 'Cairo', sans-serif;
 }
+
+.sus {
+    direction: rtl;
+    font-family: 'Cairo', sans-serif;
+    text-align: right;
+}

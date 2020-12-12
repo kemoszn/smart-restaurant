@@ -16,7 +16,7 @@ def order_list(request):
 
 def create_order(request):
     cart = Cart(request)
-    if request.user_agent.is_mobile:
+    if request.user_agent.is_mobile or request.user_agent.is_tablet and cart.__len__() > 0:
         if request.method == 'POST':
             if 'table_id' in request.session:
                 table_id = request.session['table_id']

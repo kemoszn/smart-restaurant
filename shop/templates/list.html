@@ -37,7 +37,7 @@
 
 <div class="row" style="text-align: -webkit-center;">
 {% for item in page_obj %}
-  <div class="col-sm-6 col-md-4" style="padding: 12px;">
+  <div class="col-sm-6 col-md-6 col-lg-3" style="padding: 12px;">
     <div class="card" style="width: 20rem;">
       <img class="card-img-top" style="width: 19.9rem; height: 220px;" src="{% if item.image %}{{ item.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
       <div class="card-body">
