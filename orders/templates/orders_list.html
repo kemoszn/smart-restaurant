@@ -46,16 +46,16 @@ Orders Management
     <div class="card-header" id="{{ table }}">
       <h5 class="mb-0">
         <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ table }}" aria-expanded="true" aria-controls="{{ table }}">
-          <i class="fas fa-circle" style="color: green; font-size: 13px;"></i> <b>TABLE {{ table.number }}</b>
+          <i class="fas fa-circle" style="color: green; font-size: 13px;"></i> <b>TABLE {{ table }}</b>
         </button>
-        <a href="{% url 'orders:process_table' table_number=table.number %}"><i class="fas fa-clipboard-check" style="float: right; text-align: right; font-size: 27px;"></i></a>
+        <a href="{% url 'orders:process_table' table_number=table %}"><i class="fas fa-clipboard-check" style="float: right; text-align: right; font-size: 27px;"></i></a>
       </h5>
     </div>
 
     <div id="collapse{{ table }}" class="collapse hide" aria-labelledby="{{ table }}" data-parent="#accordion">
       <div class="card-body">
         {% for order in proc_orders %}
-        {% if order.table == table.number %}
+        {% if order.table == table %}
         <b style="font-size: 25px;"><span class="badge badge-pill badge-warning">{{ order }}</span> </b> <br>
         {% for i in order_items %}
         {% if i.order == order %}

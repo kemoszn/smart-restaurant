@@ -1,4 +1,8 @@
 {% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_language_info_list for LANGUAGES as languages %}
 <!DOCTYPE html>
 <html>
 
@@ -6,6 +10,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}My shop{% endblock %}</title>
+    {% ifequal LANGUAGE_CODE 'ar' %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% endifequal %}
     <link rel="stylesheet" href="{% static 'fontawesome/css/all.css' %}">
     <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
     <!-- <link href="{% static "css/base.css" %}" rel="stylesheet"> -->
@@ -19,21 +26,19 @@
 <body style="background-color: white; #background-image: url({% static 'img/cover.jpg' %}); background-repeat: no-repeat; background-size: cover;">
 
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-        <a href="/"><img src="{% static 'img/burgerize.jpg' %}" height="100" width="140"/></a>
-        <!--<nav class="my-2 my-md-0 mr-md-3">
-            {% with total_items=cart|length %}
-            {% if cart|length > 0 %}
-            Your cart:
-            <a class="p-2 text-dark" href="{% url "cart:cart_detail" %}">
-                {{ total_items }} item{{ total_items|pluralize }},
-                ${{ cart.get_total_price }}
-            </a>
-            {% else %}
-            Your cart is empty.
-            {% endif %}
-            {% endwith %}
-        </nav>
-        <a class="btn btn-outline-primary" href="#">Sign up</a> -->
+        <a href="/"><img src="{% static 'img/burgerize.jpg' %}" height="80" width="200"/></a>
+        <nav class="my-2 my-md-0 mr-md-3">
+           
+        </nav> 
+        {% if not request.user.is_superuser %}
+        {% for language in languages %}
+        {% if language.code != LANGUAGE_CODE %}
+        <a class="btn btn-outline-warning" href="/{{ language.code }}/" 
+        style="float: right; text-align: right; color: black; font-family: 'Cairo', sans-serif;">{{ language.name_local }}
+         <i class="fas fa-globe" style="color: #eb842d;"></i></a> 
+         {% endif %}
+         {% endfor %}
+         {% endif %}
     </div>
  
             <div class="container{% if request.user.is_superuser %}-fluid{% endif %}">

@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-12 14:53+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cart/templates/detail.html:7
+msgid "Confirm Your Order"
+msgstr ""
+
+#: cart/templates/detail.html:12
+msgid "Item"
+msgstr ""
+
+#: cart/templates/detail.html:13
+msgid "Quantity"
+msgstr ""
+
+#: cart/templates/detail.html:14
+msgid "Price"
+msgstr ""
+
+#: cart/templates/detail.html:26
+msgid "Update"
+msgstr ""
+
+#: cart/templates/detail.html:36
+msgid "Total"
+msgstr ""
+
+#: cart/templates/detail.html:44
+msgid "Back to Menu"
+msgstr ""
+
+#: cart/templates/detail.html:45
+msgid "Confirm"
+msgstr ""
+
+#: myshop/settings.py:115
+msgid "English"
+msgstr ""
+
+#: myshop/settings.py:116
+msgid "Arabic"
+msgstr ""
+
+#: orders/templates/create.html:6
+msgid "Your Order"
+msgstr ""
+
+#: orders/templates/create.html:29
+msgid "Place Order"
+msgstr ""
+
+#: orders/templates/created.html:10
+msgid "Thank you"
+msgstr ""
+
+#: orders/templates/created.html:11
+msgid "Your order has been successfully completed. Your order number is"
+msgstr ""
+
+#: shop/templates/list.html:14 shop/templates/list.html:22
+msgid "All"
+msgstr ""
+
+#: shop/templates/list.html:31
+msgid "Proceed"
+msgstr ""
+
+#: shop/templates/list.html:51
+msgid "This item is selected"
+msgstr ""
+
+#: shop/templates/list.html:56
+msgid "Add to order"
+msgstr ""
+
+#: shop/templates/list.html:75 shop/templates/list.html:79
+msgid "Previous"
+msgstr ""
+
+#: shop/templates/list.html:93 shop/templates/list.html:97
+msgid "Next"
+msgstr ""

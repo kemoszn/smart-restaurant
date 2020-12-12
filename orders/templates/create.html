@@ -1,9 +1,10 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block title %}
 Checkout
 {% endblock %}
 {% block content %}
-<h4 style="text-decoration: underline; text-align: center;">Your Order</h4>
+<h4 style="text-decoration: underline; text-align: center; font-family: 'Cairo', sans-serif;">{% trans 'Your Order' %}</h4>
 
 <div class="card" style="float: center;">
   <div class="card-body" style="float: center;">
@@ -26,7 +27,7 @@ Checkout
   </div>
 </div> <br>
 <form action="." method="post" class="order-form"  style="float: center; text-align: center;">
-    <button type="submit" class="btn" style="color: white; background-color: #eb842d;">Place Order</button>
+    <button type="submit" class="btn" style="color: white; background-color: #eb842d;">{% trans 'Place Order' %}</button>
     {% csrf_token %}
 </form>
 {% endblock %}

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block title %}
 Thank you
 {% endblock %}
@@ -7,8 +8,8 @@ Thank you
 <div class="card" style="float: center;">
   <div class="card-body" style="float: center;">
     <p class="card-text">
-        <h1 style="color: #eb842d;">Thank you</h1>
-        <p>Your order has been successfully completed. Your order number is
+        <h1 style="color: #eb842d;">{% trans 'Thank you' %}</h1>
+        <p>{% trans 'Your order has been successfully completed. Your order number is' %}
     <strong>{{ order.id }}</strong>.</p>
     </p>
     

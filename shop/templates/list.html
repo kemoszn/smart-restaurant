@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block title %}
@@ -10,7 +11,7 @@
   <button class="btn dropdown-toggle" type="button" 
   id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white; background-color: #282322;">
     {% if not category %}
-    All
+    {% trans 'All' %}
     {% else %}
     {{ category }}
     {% endif %}
@@ -18,7 +19,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     {% if not category %}
     {% else %}
-      <a class="dropdown-item" href="{% url "shop:item_list" %}">All</a>
+      <a class="dropdown-item" href="{% url "shop:item_list" %}">{% trans 'All' %}</a>
     {% endif %}
     {% for c in categories %}
     {% if c != category %}
@@ -27,7 +28,7 @@
     {% endfor %}
   </div>
   <a href="{% url 'cart:cart_detail' %}"><button class="btn" type="button" style="float: right; color: white; background-color: #eb842d;">
-  Proceed <i class="fas fa-angle-right"></i></button></a>
+  {% trans 'Proceed' %} <i class="fas fa-angle-right"></i></button></a>
 </div>
 
 
@@ -47,12 +48,12 @@
           {% if item.name in cart_items %}
 
           <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
-           <i class="fas fa-check-circle" style="color: green; font-size: 18px;"></i> This item is selected
+           <i class="fas fa-check-circle" style="color: green; font-size: 18px;"></i> <span class="selected">{% trans 'This item is selected' %}</span>
           {% else %}
           <form action="{% url "cart:cart_add" item.id %}" method="post">
             {{ cart_product_form|crispy }}
             {% csrf_token %}
-            <button type="submit" class="btn" style="color: white; background-color: #eb842d;"><i class="fas fa-plus"></i> Add to order</button>
+            <button type="submit" class="btn" style="color: white; background-color: #eb842d;"><i class="fas fa-plus"></i> {% trans 'Add to order' %}</button>
           </form>
           {% endif %}
         </p>
@@ -71,11 +72,11 @@
   <ul class="pagination justify-content-end">
   {% if page_obj.has_previous %}
   <li class="page-item">
-      <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1" style="color: white; color: #eb842d;">Previous</a>
+      <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1" style="color: white; color: #eb842d;">{% trans 'Previous' %}</a>
     </li>
   {% else %}
     <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1">Previous</a>
+      <a class="page-link" href="#" tabindex="-1">{% trans 'Previous' %}</a>
     </li>
   {% endif %}
   {% for i in paginator.page_range %}
@@ -89,11 +90,11 @@
   {% endfor %}
   {% if page_obj.has_next %}
     <li class="page-item">
-      <a class="page-link" href="?page={{ page_obj.next_page_number }}" style="color: white; color: #eb842d;">Next</a>
+      <a class="page-link" href="?page={{ page_obj.next_page_number }}" style="color: white; color: #eb842d;">{% trans 'Next' %}</a>
     </li>
     {% else %}
     <li class="page-item disabled">
-      <a class="page-link" href="#">Next</a>
+      <a class="page-link" href="#">{% trans 'Next' %}</a>
     </li>
     {% endif %}
   </ul>
