@@ -1,5 +1,10 @@
 from django.db import models
 from shop.models import Item
+from django.db.models import signals
+from django.dispatch import receiver
+from webpush import send_user_notification 
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 
 class Table(models.Model):
     number = models.IntegerField()
@@ -28,6 +33,13 @@ class Order(models.Model):
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.items.all())
 
+@receiver(signals.post_save, sender=Order)
+def create_order(sender, instance, created, **kwargs):
+    print("order created")
+    user = get_object_or_404(User, pk=1)
+    print(user)
+    payload = {"head": "Welcome!", "body": "Hello World"}
+    send_user_notification(user=user, payload=payload, ttl=1000)
 
 
 class OrderItem(models.Model):

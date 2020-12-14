@@ -14,9 +14,10 @@ def order_list(request):
                 active_tables.append(order.table)
         return render(request, 'orders_list.html', {'orders': orders, 'order_items': order_items, 'tables': active_tables, 'proc_orders': processed_orders })
 
+
 def create_order(request):
     cart = Cart(request)
-    if request.user_agent.is_mobile or request.user_agent.is_tablet and cart.__len__() > 0:
+    if (request.user_agent.is_mobile or request.user_agent.is_tablet) and cart.__len__() > 0:
         if request.method == 'POST':
             if 'table_id' in request.session:
                 table_id = request.session['table_id']
@@ -34,6 +35,9 @@ def create_order(request):
             return render(request,
                     'create.html',
                     {'cart': cart})
+    else:
+        return render(request, 
+                    'please.html')
             
 def process_order(request, order_id):
     if request.user.is_superuser:

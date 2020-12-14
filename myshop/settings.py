@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'crispy_forms',
     'django_user_agents',
+    'webpush',
 ]
 
 MIDDLEWARE = [
@@ -108,6 +109,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+WEBPUSH_SETTINGS = {
+    "VAPID_PUBLIC_KEY": "BNhAnI8op-MmPKkOMSZsxPn9IWyuqMZvaFwpacQZ7n2KJkZagHmr-7Fz5Pv2zXktD58Jcj1nuE5BhBpMi3HPR3s",
+    "VAPID_PRIVATE_KEY":"0E8oQGNTFX7hc3OjC_i48b5UwWVf1ygD29oqVw6fkjE",
+    "VAPID_ADMIN_EMAIL": "9ineteen97@gmail.com"
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
@@ -145,4 +152,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CART_SESSION_ID = 'cart'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+#WEBPUSH
+
 

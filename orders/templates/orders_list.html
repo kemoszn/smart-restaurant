@@ -9,16 +9,16 @@ Orders Management
 <div id="accordion">
 {% for order in orders %}
   <div class="card">
-    <div class="card-header" id="headingOne">
+    <div class="card-header" id="heading{{ order }}">
       <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ order }}" aria-expanded="true" aria-controls="collapse{{ order }}">
           <b>Order No. {{ order.id }} at Table {{order.table}}</b>
         </button>
         <a href="{% url 'orders:process_order' order_id=order.id %}"><i class="fas fa-print" style="float: right; text-align: right; font-size: 27px;"></i></a>
       </h5>
     </div>
 
-    <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+    <div id="collapse{{ order }}" class="collapse hide" aria-labelledby="heading{{ order }}" data-parent="#accordion">
       <div class="card-body">
       {% for item in order_items %}
 {% if item.order == order %}

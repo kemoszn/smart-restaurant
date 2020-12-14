@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Please Scan QR Code 
+{% endblock %}
+{% block content %}
+<br><br>
+<h4 style="text-decoration: underline; text-align: center;"> Please Scan QR Code! </h4>
+<br>
+<img src="{% static 'img/qr.jpg' %}" height="300" width="380"/>
+{% endblock %}
