@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-12 14:53+0200\n"
+"POT-Creation-Date: 2020-12-14 21:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,60 +18,72 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cart/templates/detail.html:7
+#: cart/templates/detail.html:8
 msgid "Confirm Your Order"
 msgstr ""
 
-#: cart/templates/detail.html:12
+#: cart/templates/detail.html:13
 msgid "Item"
 msgstr ""
 
-#: cart/templates/detail.html:13
+#: cart/templates/detail.html:14
 msgid "Quantity"
 msgstr ""
 
-#: cart/templates/detail.html:14
+#: cart/templates/detail.html:15
 msgid "Price"
 msgstr ""
 
-#: cart/templates/detail.html:26
+#: cart/templates/detail.html:27
 msgid "Update"
 msgstr ""
 
-#: cart/templates/detail.html:36
+#: cart/templates/detail.html:37
 msgid "Total"
 msgstr ""
 
-#: cart/templates/detail.html:44
+#: cart/templates/detail.html:45
 msgid "Back to Menu"
 msgstr ""
 
-#: cart/templates/detail.html:45
+#: cart/templates/detail.html:47
 msgid "Confirm"
 msgstr ""
 
-#: myshop/settings.py:115
+#: myshop/settings.py:124
 msgid "English"
 msgstr ""
 
-#: myshop/settings.py:116
+#: myshop/settings.py:125
 msgid "Arabic"
 msgstr ""
 
-#: orders/templates/create.html:6
+#: orders/templates/create.html:7
 msgid "Your Order"
 msgstr ""
 
-#: orders/templates/create.html:29
+#: orders/templates/create.html:30
 msgid "Place Order"
 msgstr ""
 
-#: orders/templates/created.html:10
+#: orders/templates/created.html:11
 msgid "Thank you"
 msgstr ""
 
-#: orders/templates/created.html:11
+#: orders/templates/created.html:12
 msgid "Your order has been successfully completed. Your order number is"
+msgstr ""
+
+#: orders/templates/created.html:15
+msgid "Scan QR Code if you want to make another order"
+msgstr ""
+
+#: orders/templates/please.html:9
+msgid "Please Scan QR Code!"
+msgstr ""
+
+#: shop/templates/505.html:9
+msgid "Please close this tab first then browser and re-scan QR Code"
 msgstr ""
 
 #: shop/templates/list.html:14 shop/templates/list.html:22

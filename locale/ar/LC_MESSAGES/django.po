@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-12 14:53+0200\n"
+"POT-Creation-Date: 2020-12-14 21:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,61 +19,73 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: cart/templates/detail.html:7
+#: cart/templates/detail.html:8
 msgid "Confirm Your Order"
 msgstr "تأكيد الطلب"
 
-#: cart/templates/detail.html:12
+#: cart/templates/detail.html:13
 msgid "Item"
 msgstr "العنصر"
 
-#: cart/templates/detail.html:13
+#: cart/templates/detail.html:14
 msgid "Quantity"
 msgstr "الكمية"
 
-#: cart/templates/detail.html:14
+#: cart/templates/detail.html:15
 msgid "Price"
 msgstr "السعر"
 
-#: cart/templates/detail.html:26
+#: cart/templates/detail.html:27
 msgid "Update"
 msgstr "تحديث"
 
-#: cart/templates/detail.html:36
+#: cart/templates/detail.html:37
 msgid "Total"
 msgstr "اﻹجمالي"
 
-#: cart/templates/detail.html:44
+#: cart/templates/detail.html:45
 msgid "Back to Menu"
 msgstr "الرجوع للقائمة"
 
-#: cart/templates/detail.html:45
+#: cart/templates/detail.html:47
 msgid "Confirm"
 msgstr "تأكيد"
 
-#: myshop/settings.py:115
+#: myshop/settings.py:124
 msgid "English"
 msgstr "الانجليزية"
 
-#: myshop/settings.py:116
+#: myshop/settings.py:125
 msgid "Arabic"
 msgstr "العربية"
 
-#: orders/templates/create.html:6
+#: orders/templates/create.html:7
 msgid "Your Order"
 msgstr "طلبك"
 
-#: orders/templates/create.html:29
+#: orders/templates/create.html:30
 msgid "Place Order"
 msgstr "تأكيد الطلب"
 
-#: orders/templates/created.html:10
+#: orders/templates/created.html:11
 msgid "Thank you"
 msgstr "شكراً"
 
-#: orders/templates/created.html:11
+#: orders/templates/created.html:12
 msgid "Your order has been successfully completed. Your order number is"
 msgstr "تمت عملية الطلب بنجاح. رقم طلبك هو"
+
+#: orders/templates/created.html:15
+msgid "Scan QR Code if you want to make another order"
+msgstr "أمسح رمز الرد السريع ﻹضافة طلب أخر"
+
+#: orders/templates/please.html:9
+msgid "Please Scan QR Code!"
+msgstr "الرجاء مسح رمز الرد السريع"
+
+#: shop/templates/505.html:9
+msgid "Please close this tab first then browser and re-scan QR Code"
+msgstr "الرجاء اغلاق الصفحة ثم المتصفح ومسح رمز الرد السريع"
 
 #: shop/templates/list.html:14 shop/templates/list.html:22
 msgid "All"

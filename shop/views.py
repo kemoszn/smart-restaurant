@@ -1,10 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from .models import Item, Category
 from django.shortcuts import render, get_object_or_404
 from cart.forms import CartAddItemForm
 from cart.cart import Cart
 from django.core.paginator import Paginator
 import json
+from django.template import RequestContext
+
+def handler500(request):
+    data = {}
+    return render(request, '505.html', data)
+
 
 def item_list(request, table_id=None, category_slug=None):
     cart = Cart(request)
@@ -12,13 +18,12 @@ def item_list(request, table_id=None, category_slug=None):
     if table_id != None:
         if 'table_id' not in request.session:
             request.session['table_id'] = str(table_id)
-    print(request.session['table_id'])
+    #print(request.session['table_id'])
     categories = Category.objects.all()
     items = Item.objects.filter(available=True)
     paginator = Paginator(items, 6) 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         items = items.filter(category=category)

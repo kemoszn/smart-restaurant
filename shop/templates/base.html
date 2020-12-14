@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}My shop{% endblock %}</title>
     {% ifequal LANGUAGE_CODE 'ar' %}
+    <link rel="stylesheet" href="{% static 'css/cairo.css' %}">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% endifequal %}
     <link rel="stylesheet" href="{% static 'fontawesome/css/all.css' %}">

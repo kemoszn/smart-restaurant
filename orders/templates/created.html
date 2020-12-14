@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static %}
 {% block title %}
 Thank you
 {% endblock %}
@@ -15,6 +16,9 @@ Thank you
     
   </div>
 </div> <br>
+<hr>
+    <h4 style="text-decoration: underline; text-align: center;" class="sus"> {% trans 'Scan QR Code if you want to make another order' %} </h4>
+    <img src="{% static 'img/qr.jpg' %}" height="300" width="380"/>
 
 
 {% endblock %}

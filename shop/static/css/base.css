@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;400;700&display=swap');
+@import url('cairo.css');
 .btn, .page-item, .table {
     font-family: 'Cairo', sans-serif;
 }

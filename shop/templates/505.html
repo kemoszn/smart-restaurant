@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+505 - Close this tab
+{% endblock %}
+{% block content %}
+<br><br>
+<h4 style="text-decoration: underline; text-align: center;">{% trans 'Please close this tab first then browser and re-scan QR Code' %} </h4>
+<br>
+<img src="{% static 'img/sorry.jpg' %}" height="300" width="380"/>
+{% endblock %}

@@ -21,12 +21,16 @@ def create_order(request):
         if request.method == 'POST':
             if 'table_id' in request.session:
                 table_id = request.session['table_id']
+            else:
+                return render(request, 'please.html')
             order = Order.objects.create(table=table_id, total=cart.get_total_price(), paid=False)
             for item in cart:
                 OrderItem.objects.create(order=order,
                                 item=item['item'],
                                 price=item['price'],
                                 quantity=item['quantity'])
+            del request.session['table_id']
+            request.session.modified = True                    
             cart.clear()
             return render(request,
                         'created.html',
