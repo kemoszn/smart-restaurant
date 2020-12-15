@@ -26,7 +26,7 @@ SECRET_KEY = '6xt63rp2d6mr0@u3ig=tc!@4!&d8z=8gol0hxw!q4@qb@8ncx3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_user_agents',
     'webpush',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -78,6 +79,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'myshop.wsgi.application'
+ASGI_APPLICATION = 'myshop.routing.application'
 
 
 # Database
@@ -153,6 +155,14 @@ CART_SESSION_ID = 'cart'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-#WEBPUSH
+#CHANNELS
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 

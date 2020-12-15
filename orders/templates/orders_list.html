@@ -3,6 +3,10 @@
 Orders Management
 {% endblock %}
 {% block content %}
+<div class="row" style="float: center;">
+<div class="col col-lg-3"></div><div class="col col-lg-5" id="notifylist">
+</div>
+</div>
 <div class="row">
 <div class="col col-md-5">
 <h2 style="text-decoration: underline; text-align: center;"><span class="badge badge-warning">Orders</span></h2>
@@ -73,4 +77,28 @@ Orders Management
 {% endfor %}
 </div>
 </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const webSocketBridge = new channels.WebSocketBridge();
+      const nl = document.querySelector("#notifylist");
+      
+      webSocketBridge.connect('/notifications/');
+      webSocketBridge.listen(function(action, stream) {
+        console.log("RESPONSE:", action);
+        if(action.event == "New Order") {
+          console.log("success");
+          var el = document.createElement("div");
+          el.innerHTML = `<div class="alert alert-warning" role="alert" style="text-align: center;">
+                          <h4><i class="far fa-bell"></i> <a href="/orders/admin"> You have a new order at table ${action.table} </a><h4>
+                          </div>`;
+          /*el.innerHTML = `<div class="alert alert-warning" role="alert" style="text-align: center;">
+                          <h4><i class="far fa-bell"></i> You have a new order at ${action.table}<h4>
+                          </div>`*/
+          nl.appendChild(el);
+        }
+      })
+      document.ws = webSocketBridge; /* for debugging */
+    })
+    </script>
 {% endblock %}
