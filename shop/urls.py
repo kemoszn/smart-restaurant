@@ -8,4 +8,7 @@ urlpatterns = [
     path('<int:table_id>', views.item_list, name='item_list_by_table'),
     path('<slug:category_slug>/', views.item_list,
     name='item_list_by_category'),
+    path('takeout', views.take_out, name='take_out'),
+    path('takeout/<slug:category_slug>/', views.take_out, name='take_out_by_category'),
+
 ]

@@ -48,3 +48,24 @@ def item_list(request, table_id=None, category_slug=None):
                 'page_obj': page_obj,
                 'paginator': paginator
                 })
+
+
+def take_out(request, category_slug=None):
+    cart = Cart(request)
+    category = None
+    categories = Category.objects.all()
+    items = Item.objects.filter(available=True)
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        items = items.filter(category=category)
+    
+    cart_items = []
+    for i in cart:
+        cart_items.append(i["item"].name)
+    cart_product_form = CartAddItemForm()
+    return render(request, 'takeout.html', {'category': category,
+                                             'items': items,
+                                             'cart_items': cart_items, 
+                                             'cart': cart,
+                                             'categories': categories,
+                                             'cart_product_form': cart_product_form})

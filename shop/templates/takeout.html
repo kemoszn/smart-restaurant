@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block title %}
+Take-out
+{% endblock %}
+{% block content %}
+<br><br>
+<div class="dropdown">
+  <button class="btn dropdown-toggle" type="button" 
+  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white; background-color: #282322;">
+    {% if not category %}
+    {% trans 'All' %}
+    {% else %}
+    {{ category }}
+    {% endif %}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    {% if not category %}
+    {% else %}
+      <a class="dropdown-item" href="{% url "shop:take_out" %}">{% trans 'All' %}</a>
+    {% endif %}
+    {% for c in categories %}
+    {% if c != category %}
+      <a class ="dropdown-item" href="{% url 'shop:take_out_by_category' c.slug %}">{{ c.name }}</a>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <a href="{% url 'cart:cart_detail' %}"><button class="btn" type="button" style="float: right; color: white; background-color: #eb842d;">
+  {% trans 'Proceed' %} <i class="fas fa-angle-right"></i></button></a>
+</div>
+
+
+
+<br>
+
+<div class="row" style="text-align: -webkit-center;">
+{% for item in items %}
+  <div class="col-sm-6 col-md-6 col-lg-2" style="padding: 12px;">
+    <div class="card" style="width: 17rem;">
+      <img class="card-img-top" style="width: 16.9rem; height: 220px;" src="{% if item.image %}{{ item.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+      <div class="card-body">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <h6><b>{{ item.price }} SDG </b></h6> <hr>
+        <p>
+          {% if item.name in cart_items %}
+
+          <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+           <i class="fas fa-check-circle" style="color: green; font-size: 18px;"></i> <span class="selected">{% trans 'This item is selected' %}</span>
+          <br><br><br><br>
+          {% else %}
+          <form action="{% url "cart:cart_add" item.id %}" method="post">
+            {{ cart_product_form|crispy }}
+            {% csrf_token %}
+            <button type="submit" class="btn" style="color: white; background-color: #eb842d;"><i class="fas fa-plus"></i> {% trans 'Add to order' %}</button>
+          </form>
+          {% endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+  <br>
+{% endfor %}
+</div>
+
+<br><br>
+{% endblock %}

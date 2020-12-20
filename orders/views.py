@@ -57,7 +57,25 @@ def process_order(request, order_id):
 def process_table(request, table_number):
     if request.user.is_superuser:
         table = get_object_or_404(Table, number=table_number)
-        Order.objects.filter(table=table.number).update(paid=True)
-        print("Hello?")
+        orders = Order.objects.filter(table=table.number, processed=True, paid=False)
+        order_items = OrderItem.objects.all()
+        total = 0
+        for order in orders: 
+            for item in order_items:
+                if item.order == order:
+                    print(str(item.item)+' '+ str(item.quantity)+ ' ' + str(item.quantity*item.price))
+                    total = total + (item.price*item.quantity)
+        print("Total: " + str(total) + "SDG")
+        #Order.objects.filter(table=table.number, processed=True).update(paid=True)
 
         return redirect(request.META['HTTP_REFERER'])
+
+
+def create_order_admin(request):
+    if request.user.is_superuser:
+        cart = Cart(request)
+        for item in cart:
+            print(str(item['item']) + ' ' + str(item['quantity']) + ' ' + str(item['price']))
+        print(cart.get_total_price())
+        cart.clear()
+        return redirect('shop:take_out')

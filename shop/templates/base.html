@@ -43,6 +43,19 @@
     </div>
  
             <div class="container{% if request.user.is_superuser %}-fluid{% endif %}">
+            {% if request.user.is_superuser %} 
+            <div class="row">
+            <div class="col col-lg-4">
+            <a href="/takeout"><button class="btn btn-primary btn-bg btn-block" style="font-size: 25px;">Take Out</button> </a>
+            </div>
+            <div class="col col-lg-4">
+            <a href="/orders/admin"><button class="btn btn-primary btn-bg btn-block" style="font-size: 25px;">Table Manager</button> </a>
+            </div>
+            <div class="col col-lg-4">
+            <a href="/admin/shop/item"><button class="btn btn-primary btn-bg btn-block" style="font-size: 25px;">Item Inventory</button> </a>
+            </div>
+            </div>
+            {% endif %}
             {% block content %}
             {% endblock %}
             </div>

@@ -44,7 +44,11 @@ Your Order
 <br>
 <a href="{% url "shop:item_list" %}" style="float:left;"><button type="button" class="btn" style="color: white; background-color: #282322;">{% trans 'Back to Menu' %} </button></a>
 {% if cart|length > 0 %}
+{% if request.user.is_superuser %}
+<a href="{% url "orders:create_order_admin" %}" style="float:right;"><button type="button" class="btn" style="color: white; background-color: #eb842d;">{% trans 'Confirm' %}</button></a>
+{% else %}
 <a href="{% url "orders:create_order" %}" style="float:right;"><button type="button" class="btn" style="color: white; background-color: #eb842d;">{% trans 'Confirm' %}</button></a>
+{% endif %}
 {% endif %}
 <br><br>
 {% endblock %}

@@ -3,102 +3,112 @@
 Orders Management
 {% endblock %}
 {% block content %}
+<br>
 <div class="row" style="float: center;">
-<div class="col col-lg-3"></div><div class="col col-lg-5" id="notifylist">
-</div>
+  <div class="col col-lg-3"></div>
+  <div class="col col-lg-5" id="notifylist">
+  <br>
+  </div>
 </div>
 <div class="row">
-<div class="col col-md-5">
-<h2 style="text-decoration: underline; text-align: center;"><span class="badge badge-warning">Orders</span></h2>
-<div id="accordion">
-{% for order in orders %}
-  <div class="card">
-    <div class="card-header" id="heading{{ order }}">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ order }}" aria-expanded="true" aria-controls="collapse{{ order }}">
-          <b>Order No. {{ order.id }} at Table {{order.table}}</b>
-        </button>
-        <a href="{% url 'orders:process_order' order_id=order.id %}"><i class="fas fa-print" style="float: right; text-align: right; font-size: 27px;"></i></a>
-      </h5>
-    </div>
+  <div class="col col-md-5">
+    <h2 style="text-decoration: underline; text-align: center;"><span class="badge badge-warning">Orders</span></h2>
+    <div id="accordion">
+      {% for order in orders %}
+      <div class="card">
+        <div class="card-header" id="heading{{ order }}">
+          <h5 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ order }}" aria-expanded="true"
+              aria-controls="collapse{{ order }}">
+              <b>Order No. {{ order.id }} at Table {{order.table}}</b>
+            </button>
+            <a href="{% url 'orders:process_order' order_id=order.id %}"><i class="fas fa-print"
+                style="float: right; text-align: right; font-size: 27px;"></i></a>
+          </h5>
+        </div>
 
-    <div id="collapse{{ order }}" class="collapse hide" aria-labelledby="heading{{ order }}" data-parent="#accordion">
-      <div class="card-body">
-      {% for item in order_items %}
-{% if item.order == order %}
-        
-        
-        {{ item.quantity }} {{ item.item }}<br>
-        
-          {% endif %}
-{% endfor %}
-  <hr> <b>Total</b> <b style="float:right;">{{ order.total }}</b> 
+        <div id="collapse{{ order }}" class="collapse hide" aria-labelledby="heading{{ order }}"
+          data-parent="#accordion">
+          <div class="card-body">
+            {% for item in order_items %}
+            {% if item.order == order %}
+
+
+            {{ item.quantity }} {{ item.item }}<br>
+
+            {% endif %}
+            {% endfor %}
+            <hr> <b>Total</b> <b style="float:right;">{{ order.total }}</b>
+          </div>
+        </div>
       </div>
+      <br>
+      {% endfor %}
     </div>
   </div>
-<br>
-{% endfor %}
-</div>
-</div>
-<div class="col col-md-2">
-</div>
-<div class="col col-md-5">
-<h2 style="text-decoration: underline; float: center; text-align: center;"><span class="badge badge-warning">Tables</span></h2>
-<div id="accordion">
-{% for table in tables %}
-  <div class="card">
-    <div class="card-header" id="{{ table }}">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ table }}" aria-expanded="true" aria-controls="{{ table }}">
-          <i class="fas fa-circle" style="color: green; font-size: 13px;"></i> <b>TABLE {{ table }}</b>
-        </button>
-        <a href="{% url 'orders:process_table' table_number=table %}"><i class="fas fa-clipboard-check" style="float: right; text-align: right; font-size: 27px;"></i></a>
-      </h5>
-    </div>
-
-    <div id="collapse{{ table }}" class="collapse hide" aria-labelledby="{{ table }}" data-parent="#accordion">
-      <div class="card-body">
-        {% for order in proc_orders %}
-        {% if order.table == table %}
-        <b style="font-size: 25px;"><span class="badge badge-pill badge-warning">{{ order }}</span> </b> <br>
-        {% for i in order_items %}
-        {% if i.order == order %}
-        {{ i.quantity }} {{ i.item }}<br>
-        {% endif %}
-        {% endfor %}
-        <hr> <b>Total</b> <b style="float:right;">{{ order.total }} SDG</b> <br><br>
-        {% endif %}
-        
-        {% endfor %}
-      </div>
-    </div>
+  <div class="col col-md-2">
   </div>
-</div> <br>
-{% endfor %}
-</div>
-</div>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const webSocketBridge = new channels.WebSocketBridge();
-      const nl = document.querySelector("#notifylist");
+  <div class="col col-md-5">
+    <h2 style="text-decoration: underline; float: center; text-align: center;"><span
+        class="badge badge-warning">Tables</span></h2>
+        {% for table in tables %}
+    <div id="accordion">
       
-      webSocketBridge.connect('/notifications/');
-      webSocketBridge.listen(function(action, stream) {
-        console.log("RESPONSE:", action);
-        if(action.event == "New Order") {
-          console.log("success");
-          var el = document.createElement("div");
-          el.innerHTML = `<div class="alert alert-warning" role="alert" style="text-align: center;">
+      <div class="card">
+        <div class="card-header" id="{{ table }}">
+          <h5 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ table }}" aria-expanded="true"
+              aria-controls="{{ table }}">
+              <i class="fas fa-circle" style="color: green; font-size: 13px;"></i> <b>TABLE {{ table }}</b>
+            </button>
+            <a href="{% url 'orders:process_table' table_number=table %}"><i class="fas fa-clipboard-check"
+                style="float: right; text-align: right; font-size: 27px;"></i></a>
+          </h5>
+        </div>
+
+        <div id="collapse{{ table }}" class="collapse hide" aria-labelledby="{{ table }}" data-parent="#accordion">
+          <div class="card-body">
+            {% for order in proc_orders %}
+            {% if order.table == table %}
+            <b style="font-size: 25px;"><span class="badge badge-pill badge-warning">{{ order }}</span> </b> <br>
+            {% for i in order_items %}
+            {% if i.order == order %}
+            {{ i.quantity }} {{ i.item }}<br>
+            {% endif %}
+            {% endfor %}
+            <hr> <b>Total</b> <b style="float:right;">{{ order.total }} SDG</b> <br><br>
+            {% endif %}
+
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div> <br>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const webSocketBridge = new channels.WebSocketBridge();
+    const nl = document.querySelector("#notifylist");
+
+    webSocketBridge.connect('/notifications/');
+    webSocketBridge.listen(function (action, stream) {
+      console.log("RESPONSE:", action);
+      if (action.event == "New Order") {
+        console.log("success");
+        var el = document.createElement("div");
+        el.innerHTML = `<div class="alert alert-warning" role="alert" style="text-align: center;">
                           <h4><i class="far fa-bell"></i> <a href="/orders/admin"> You have a new order at table ${action.table} </a><h4>
                           </div>`;
-          /*el.innerHTML = `<div class="alert alert-warning" role="alert" style="text-align: center;">
-                          <h4><i class="far fa-bell"></i> You have a new order at ${action.table}<h4>
-                          </div>`*/
-          nl.appendChild(el);
-        }
-      })
-      document.ws = webSocketBridge; /* for debugging */
+        /*el.innerHTML = `<div class="alert alert-warning" role="alert" style="text-align: center;">
+                        <h4><i class="far fa-bell"></i> You have a new order at ${action.table}<h4>
+                        </div>`*/
+        nl.appendChild(el);
+      }
     })
-    </script>
+    document.ws = webSocketBridge; /* for debugging */
+  })
+</script>
 {% endblock %}
